@@ -5,6 +5,9 @@ using Infrastructure.WebApiClient.Options;
 using Infrastructure.WebApiClient;
 using Core.Application.UseCases;
 using Infrastructure.SQLite.Options;
+using Core.Application.Abstractions;
+using Infrastructure.SpreadSheets;
+using ConsoleClient;
 
 internal class Program
 {
@@ -13,8 +16,8 @@ internal class Program
         Console.WriteLine("Start building...");
 
         // тестовый блок
-        var c = new WebApiClient("https://berserkdeck.ru/dev/api/cards");
-        var t = await c.GetCards();
+        //var c = new WebApiClient("https://berserkdeck.ru/dev/api/cards");
+        //var t = await c.GetCardsAsync();
         // --------------------------
 
         Host.CreateDefaultBuilder()
@@ -32,8 +35,11 @@ internal class Program
                 services.Configure<WebApiOptions>(configuration.GetRequiredSection("WebApi"));
                 services.Configure<SqliteOptions>(configuration.GetRequiredSection("ConnectionStrings"));
 
-                //services.AddTransient<IWebApiClient, WebApiClient>();
-                services.AddTransient<CreateCardsUseCase>();
+                services.AddTransient<IWebApiClient, WebApiClient>();
+                services.AddTransient<ICardsStorageCreator, SpreadSheetStorageCreator>();
+                services.AddTransient<SaveCardsUseCase>();
+
+                services.AddHostedService<MainHostedService>();
             })
             .Build()
             .Run();

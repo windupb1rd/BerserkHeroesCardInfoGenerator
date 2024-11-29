@@ -8,14 +8,15 @@ using System.Threading.Tasks;
 namespace Core.Application.Abstractions
 {
     /// <summary>
-    /// 
+    /// Абстракция сервиса для создания хранилища карт с описаниями.
     /// </summary>
-    public interface IWebApiClient
+    public interface ICardsStorageCreator
     {
         /// <summary>
-        /// 
+        /// Создает хранилище карт.
         /// </summary>
+        /// <param name="cards"></param>
         /// <returns></returns>
-        Task<IEnumerable<Card>> GetCardsAsync();
+        public Task Create(IEnumerable<Card> cards);
     }
 }
