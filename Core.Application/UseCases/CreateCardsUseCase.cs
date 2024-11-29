@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Core.Application.UseCases
 {
-    internal class CreateCardsUseCase
+    public class CreateCardsUseCase
     {
         private readonly IWebApiClient _webApiClient;
 

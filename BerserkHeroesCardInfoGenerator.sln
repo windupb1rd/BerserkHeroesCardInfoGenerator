@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.12.35506.116 d17.12
+VisualStudioVersion = 17.12.35506.116
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleClient", "BerserkHeroesCardInfoGenerator\ConsoleClient.csproj", "{2C1ECC3C-47C9-44B6-8A42-6D128F2B0E24}"
 EndProject
@@ -16,6 +16,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{3EED4E6F-8616-4CF3-94EF-380346E03270}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure.WebApiClient", "Infrastructure.WebApiClient\Infrastructure.WebApiClient.csproj", "{FE41F975-7ABC-4BD7-B644-E1557CB34B23}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure.SQLite", "Infrastructure.SQLite\Infrastructure.SQLite.csproj", "{D6FB55EC-331B-4A20-94AE-16A58B9FD437}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{FE41F975-7ABC-4BD7-B644-E1557CB34B23}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FE41F975-7ABC-4BD7-B644-E1557CB34B23}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FE41F975-7ABC-4BD7-B644-E1557CB34B23}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D6FB55EC-331B-4A20-94AE-16A58B9FD437}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D6FB55EC-331B-4A20-94AE-16A58B9FD437}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D6FB55EC-331B-4A20-94AE-16A58B9FD437}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D6FB55EC-331B-4A20-94AE-16A58B9FD437}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -47,5 +53,6 @@ Global
 		{6664D011-D858-49A8-8DA0-F11CAD7502F2} = {337DFE6F-3FAF-4C12-B455-2995D491D84D}
 		{1E70E1A6-0D2C-42B1-9752-3AF07C33E283} = {337DFE6F-3FAF-4C12-B455-2995D491D84D}
 		{FE41F975-7ABC-4BD7-B644-E1557CB34B23} = {64CAF012-5596-466B-88FC-5525A718B38C}
+		{D6FB55EC-331B-4A20-94AE-16A58B9FD437} = {64CAF012-5596-466B-88FC-5525A718B38C}
 	EndGlobalSection
 EndGlobal

@@ -3,6 +3,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Infrastructure.WebApiClient.Options;
 using Infrastructure.WebApiClient;
+using Core.Application.UseCases;
+using Infrastructure.SQLite.Options;
 
 internal class Program
 {
@@ -27,10 +29,11 @@ internal class Program
             .ConfigureServices((hostContext, services) =>
             {
                 IConfiguration configuration = hostContext.Configuration;
-
                 services.Configure<WebApiOptions>(configuration.GetRequiredSection("WebApi"));
+                services.Configure<SqliteOptions>(configuration.GetRequiredSection("ConnectionStrings"));
 
                 //services.AddTransient<IWebApiClient, WebApiClient>();
+                services.AddTransient<CreateCardsUseCase>();
             })
             .Build()
             .Run();

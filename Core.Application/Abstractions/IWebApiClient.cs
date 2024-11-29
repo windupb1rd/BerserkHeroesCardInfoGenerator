@@ -8,6 +8,6 @@ namespace Core.Application.Abstractions
 {
     public interface IWebApiClient
     {
-        //Task<IEnumerable<Card>> GetCards(); // сущность домена? модель?
+        Task<IEnumerable<Card>> GetCards(); // сущность домена? модель?
     }
 }
