@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 
 namespace Infrastructure.WebApiClient
 {
-    public class WebApiClient// : IWebApiClient
+    public class WebApiClient : IWebApiClient
     {
         private readonly WebApiOptions _options;
         //private readonly List<Content> _cards = new List<Content>();
@@ -27,7 +27,7 @@ namespace Infrastructure.WebApiClient
 
         //public IEnumerable<Content> GetCards => _cards;
 
-        public async Task<IEnumerable<Content>> GetCards()
+        public async Task<IEnumerable<Content>> GetCardsAsync()
         {
             string url = "{0}?sort=setInfo.ordinal,desc&sort=number&page={1}&size=2000";
             HttpClient client = new HttpClient();
