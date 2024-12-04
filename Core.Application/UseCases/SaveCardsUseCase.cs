@@ -5,20 +5,23 @@ namespace Core.Application.UseCases
     public class SaveCardsUseCase
     {
         private readonly IWebApiClient _webApiClient;
-        private readonly ICardsStorageCreator _сreator;
+        private readonly IEnumerable<ICardsStorageCreator> _сreators;
 
         public SaveCardsUseCase(
             IWebApiClient webApiClient,
-            ICardsStorageCreator сreator)
+            IEnumerable<ICardsStorageCreator> сreators)
         {
             _webApiClient = webApiClient;
-            _сreator = сreator;
+            _сreators = сreators;
         }
 
         public async Task ExecuteAsync()
         {
             var cards = await _webApiClient.GetCardsAsync();
-            await _сreator.Create(cards);
+            foreach (var creator in _сreators)
+            {
+                await creator.Create(cards);
+            }
         }
     }
 }

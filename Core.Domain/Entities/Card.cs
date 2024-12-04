@@ -1,7 +1,12 @@
 ﻿namespace Core.Domain.Entities
 {
-    public class Card
+    public class Card // TODO: Добавить все поля из API. Хранить номер сета и карты для получения картинки
     {
+        /// <summary>
+        /// Идентификатор карты в приложении.
+        /// </summary>
+        public int Id { get; set; }
+
         /// <summary>
         /// Сила удара.
         /// </summary>
