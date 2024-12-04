@@ -13,8 +13,12 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Core.Application\Core.Application.csproj" />
+    <ProjectReference Include="..\Core.Application\Core.Application.csproj" />
+    <ProjectReference Include="..\Core.Domain\Core.Domain.csproj" />
     <ProjectReference Include="..\Core.Domain\Core.Domain.csproj" />
     <ProjectReference Include="..\Infrastructure.SpreadSheets\Infrastructure.SpreadSheets.csproj" />
+    <ProjectReference Include="..\Infrastructure.SpreadSheets\Infrastructure.SpreadSheets.csproj" />
+    <ProjectReference Include="..\Infrastructure.SQLite\Infrastructure.SQLite.csproj" />
     <ProjectReference Include="..\Infrastructure.SQLite\Infrastructure.SQLite.csproj" />
     <ProjectReference Include="..\Infrastructure.WebApiClient\Infrastructure.WebApiClient.csproj" />
   </ItemGroup>
