@@ -13,14 +13,17 @@ namespace Infrastructure.WebApiClient
     {
         private const string URL_PATTERN = "{0}?sort=setInfo.ordinal,desc&sort=number&page={1}&size=2000";
         private readonly WebApiOptions _options;
-        private readonly IJsonDownloader _jsonDownloader;
+        private readonly IContentDownloader _contentDownloader;
+        private readonly IContentStringDeserializer _contentStringDeserializer;
 
         public WebApiClient(
             IOptions<WebApiOptions> options,
-            IJsonDownloader jsonDownloader)
+            IContentDownloader jsonDownloader,
+            IContentStringDeserializer contentStringDeserializer)
         {
             _options = options.Value;
-            _jsonDownloader = jsonDownloader;
+            _contentDownloader = jsonDownloader;
+            _contentStringDeserializer = contentStringDeserializer;
         }
 
         public async Task<IEnumerable<Card>> GetCardsAsync()
@@ -31,14 +34,14 @@ namespace Infrastructure.WebApiClient
             var totalNumberOfPages = 0;
             do
             {
-                string response = await _jsonDownloader.GetJson(string.Format(URL_PATTERN, _options.Url, ++pageNumber));
-                var data = JsonConvert.DeserializeObject<Page>(response);
+                string response = await _contentDownloader.GetContentString(string.Format(URL_PATTERN, _options.Url, ++pageNumber));
+                var data = _contentStringDeserializer.DeserilizeIntoPage(response);
                 content.AddRange(data.Content);
                 totalNumberOfPages = data.TotalPages;
             }
             while (pageNumber < totalNumberOfPages);
 
-            _jsonDownloader.Dispose();
+            _contentDownloader.Dispose();
 
             return new ContentToCardMapper().Map(content);
         }

@@ -3,11 +3,11 @@ using Infrastructure.WebApiClient.Abstractions;
 
 namespace Infrastructure.WebApiClient
 {
-    public class JsonDownloaderLogger : IJsonDownloader
+    public class ContentDownloaderLogger : IContentDownloader
     {
-        private readonly IJsonDownloader _client;
+        private readonly IContentDownloader _client;
 
-        public JsonDownloaderLogger(IJsonDownloader client)
+        public ContentDownloaderLogger(IContentDownloader client)
         {
             _client = client;
         }
@@ -17,11 +17,11 @@ namespace Infrastructure.WebApiClient
             _client.Dispose();
         }
 
-        public Task<string> GetJson(string url)
+        public Task<string> GetContentString(string url)
         {
             Console.WriteLine("Вызван декоратор логгирования.");
             Console.WriteLine(url);
-            return _client.GetJson(url);
+            return _client.GetContentString(url);
         }
     }
 }

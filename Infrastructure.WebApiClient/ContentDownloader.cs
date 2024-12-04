@@ -2,7 +2,7 @@
 
 namespace Infrastructure.WebApiClient
 {
-    public class JsonDownloader : IJsonDownloader
+    public class ContentDownloader : IContentDownloader
     {
         private readonly HttpClient _httpClient = new HttpClient();
 
@@ -11,7 +11,7 @@ namespace Infrastructure.WebApiClient
             _httpClient.Dispose();
         }
 
-        public Task<string> GetJson(string url)
+        public Task<string> GetContentString(string url)
         {
             return _httpClient.GetStringAsync(url);
         }

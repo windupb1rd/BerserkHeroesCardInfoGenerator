@@ -1,7 +1,7 @@
 ﻿namespace Infrastructure.WebApiClient.Abstractions
 {
-    public interface IJsonDownloader : IDisposable
+    public interface IContentDownloader : IDisposable
     {
-        Task<string> GetJson(string url);
+        Task<string> GetContentString(string url);
     }
 }
