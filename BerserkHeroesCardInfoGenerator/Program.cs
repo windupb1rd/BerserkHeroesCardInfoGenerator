@@ -31,9 +31,11 @@ internal class Program
 
                 services.AddTransient<IWebApiClient, WebApiClient>();
 
-                services.AddTransient<JsonDownloader>();
                 services.AddTransient<IJsonDownloader>(provider =>
-                    new JsonDownloaderLogger(provider.GetRequiredService<JsonDownloader>()));
+                {
+                    IJsonDownloader service = new JsonDownloader();
+                    return new JsonDownloaderLogger(service);
+                });
 
                 services.AddTransient<ICardsStorageCreator, SpreadSheetStorageCreator>();
                 services.AddTransient<SaveCardsUseCase>();
