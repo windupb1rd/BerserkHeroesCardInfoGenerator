@@ -5,7 +5,6 @@ using Infrastructure.WebApiClient.Mapping;
 using Infrastructure.WebApiClient.Models;
 using Infrastructure.WebApiClient.Options;
 using Microsoft.Extensions.Options;
-using Newtonsoft.Json;
 
 namespace Infrastructure.WebApiClient
 {

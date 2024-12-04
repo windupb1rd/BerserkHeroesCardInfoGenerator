@@ -19,8 +19,6 @@ internal class Program
             .ConfigureAppConfiguration(configBuilder =>
             {
                 configBuilder
-                    // без этой строки пытается взять файл из папки бинов
-                    .SetBasePath("C:\\Users\\alex\\source\\repos\\BerserkHeroesCardInfoGenerator\\BerserkHeroesCardInfoGenerator")
                     .AddJsonFile("appsettings.json");
             })
             .ConfigureServices((hostContext, services) =>
