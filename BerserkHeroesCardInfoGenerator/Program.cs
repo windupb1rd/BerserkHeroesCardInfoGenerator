@@ -34,7 +34,8 @@ internal class Program
                 services.AddTransient<IJsonDownloader>(provider =>
                 {
                     IJsonDownloader service = new JsonDownloader();
-                    return new JsonDownloaderLogger(service);
+                    service = new JsonDownloaderLogger(service);
+                    return new JsonDownloaderRequestResender(service);
                 });
 
                 services.AddTransient<ICardsStorageCreator, SpreadSheetStorageCreator>();

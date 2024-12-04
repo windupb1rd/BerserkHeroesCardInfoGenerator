@@ -38,6 +38,8 @@ namespace Infrastructure.WebApiClient
             }
             while (pageNumber < totalNumberOfPages);
 
+            _jsonDownloader.Dispose();
+
             return new ContentToCardMapper().Map(content);
         }
     }

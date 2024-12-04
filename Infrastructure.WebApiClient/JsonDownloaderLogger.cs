@@ -12,8 +12,14 @@ namespace Infrastructure.WebApiClient
             _client = client;
         }
 
+        public void Dispose()
+        {
+            _client.Dispose();
+        }
+
         public Task<string> GetJson(string url)
         {
+            Console.WriteLine("Вызван декоратор логгирования.");
             Console.WriteLine(url);
             return _client.GetJson(url);
         }
