@@ -8,18 +8,12 @@ using Infrastructure.SQLite.Options;
 using Core.Application.Abstractions;
 using Infrastructure.SpreadSheets;
 using ConsoleClient;
+using Infrastructure.WebApiClient.Abstractions;
 
 internal class Program
 {
     private async static Task Main(string[] args)
     {
-        Console.WriteLine("Start building...");
-
-        // тестовый блок
-        //var c = new WebApiClient("https://berserkdeck.ru/dev/api/cards");
-        //var t = await c.GetCardsAsync();
-        // --------------------------
-
         Host.CreateDefaultBuilder()
             .ConfigureHostConfiguration(configuration => configuration.AddCommandLine(args))
             .ConfigureAppConfiguration(configBuilder =>
@@ -36,6 +30,11 @@ internal class Program
                 services.Configure<SqliteOptions>(configuration.GetRequiredSection("ConnectionStrings"));
 
                 services.AddTransient<IWebApiClient, WebApiClient>();
+
+                services.AddTransient<JsonDownloader>();
+                services.AddTransient<IJsonDownloader>(provider =>
+                    new JsonDownloaderLogger(provider.GetRequiredService<JsonDownloader>()));
+
                 services.AddTransient<ICardsStorageCreator, SpreadSheetStorageCreator>();
                 services.AddTransient<SaveCardsUseCase>();
 
