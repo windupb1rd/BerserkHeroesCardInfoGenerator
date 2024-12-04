@@ -4,6 +4,9 @@ using Infrastructure.SQLite.DbContexts;
 
 namespace Infrastructure.SQLite
 {
+    /// <summary>
+    /// Сервис сохранения карточек в БД SQLite.
+    /// </summary>
     public class SqliteStorageCreator : ICardsStorageCreator
     {
         private readonly AppDbContext _context;
@@ -13,6 +16,7 @@ namespace Infrastructure.SQLite
             _context = context;
         }
 
+        /// <inheritdoc/>
         public async Task Create(IEnumerable<Card> cards)
         {
             var a = _context.Cards;

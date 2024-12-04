@@ -1,5 +1,8 @@
 ﻿namespace Infrastructure.WebApiClient.Models
 {
+    /// <summary>
+    /// Модель информации о выпуске.
+    /// </summary>
     public class SetInfo
     {
         /// <summary>

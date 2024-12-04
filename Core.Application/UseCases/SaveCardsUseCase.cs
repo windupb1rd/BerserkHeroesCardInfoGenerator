@@ -2,6 +2,9 @@
 
 namespace Core.Application.UseCases
 {
+    /// <summary>
+    /// Операция сохранения карточек.
+    /// </summary>
     public class SaveCardsUseCase
     {
         private readonly IWebApiClient _webApiClient;
@@ -15,6 +18,10 @@ namespace Core.Application.UseCases
             _сreators = сreators;
         }
 
+        /// <summary>
+        /// Сохраняет карточки.
+        /// </summary>
+        /// <returns></returns>
         public async Task ExecuteAsync()
         {
             var cards = await _webApiClient.GetCardsAsync();

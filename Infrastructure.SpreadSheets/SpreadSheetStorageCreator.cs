@@ -5,8 +5,12 @@ using static System.Net.WebRequestMethods;
 
 namespace Infrastructure.SpreadSheets
 {
+    /// <summary>
+    /// Сервис сохранения карт в виде .xlsx документа.
+    /// </summary>
     public class SpreadSheetStorageCreator : ICardsStorageCreator
     {
+        /// <inheritdoc/>
         public Task Create(IEnumerable<Card> cards)
         {
             var workbook = WorkBook.Create(ExcelFileFormat.XLSX);

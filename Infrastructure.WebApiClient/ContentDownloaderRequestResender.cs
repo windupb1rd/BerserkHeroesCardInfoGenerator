@@ -3,6 +3,9 @@ using Infrastructure.WebApiClient.Abstractions;
 
 namespace Infrastructure.WebApiClient
 {
+    /// <summary>
+    /// Декоратор повторной отправки запроса сервисом загрузки данных с API при неудачной попытке.
+    /// </summary>
     public class ContentDownloaderRequestResender : IContentDownloader
     {
         private readonly IContentDownloader _client;
@@ -17,6 +20,7 @@ namespace Infrastructure.WebApiClient
             _client.Dispose();
         }
 
+        /// <inheritdoc/>
         public async Task<string> GetContentString(string url)
         {
             Console.WriteLine("Вызван декоратор переотправки запроса.");

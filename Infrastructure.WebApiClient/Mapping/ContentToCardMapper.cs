@@ -3,8 +3,16 @@ using Infrastructure.WebApiClient.Models;
 
 namespace Infrastructure.WebApiClient.Mapping
 {
+    /// <summary>
+    /// Маппер из коллекции <see cref="Content"/> в коллекцию <see cref="Card"/>.
+    /// </summary>
     public class ContentToCardMapper
     {
+        /// <summary>
+        /// Маппит коллекцию <see cref="Content"/> в коллекцию <see cref="Card"/>
+        /// </summary>
+        /// <param name="content"></param>
+        /// <returns></returns>
         public IEnumerable<Card> Map(IEnumerable<Content> content)
         {
             var cards = new List<Card>();

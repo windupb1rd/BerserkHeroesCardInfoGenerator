@@ -2,6 +2,9 @@
 
 namespace Infrastructure.WebApiClient
 {
+    /// <summary>
+    /// Сервис загрузки данных с API.
+    /// </summary>
     public class ContentDownloader : IContentDownloader
     {
         private readonly HttpClient _httpClient = new HttpClient();
@@ -11,6 +14,7 @@ namespace Infrastructure.WebApiClient
             _httpClient.Dispose();
         }
 
+        /// <inheritdoc/>
         public Task<string> GetContentString(string url)
         {
             return _httpClient.GetStringAsync(url);

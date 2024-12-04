@@ -8,6 +8,9 @@ using Telegram.Bot.Types.ReplyMarkups;
 
 namespace Infrastructure.TelegramBot
 {
+    /// <summary>
+    /// Клиент телеграм бота.
+    /// </summary>
     public class TelegramBotClient
     {
         private readonly TelegramBotOptions _options;
