@@ -3,11 +3,11 @@ using Infrastructure.WebApiClient.Abstractions;
 
 namespace Infrastructure.WebApiClient
 {
-    public class JsonDownloaderRequestResender : IJsonDownloader
+    public class ContentDownloaderRequestResender : IContentDownloader
     {
-        private readonly IJsonDownloader _client;
+        private readonly IContentDownloader _client;
 
-        public JsonDownloaderRequestResender(IJsonDownloader client)
+        public ContentDownloaderRequestResender(IContentDownloader client)
         {
             _client = client;
         }
@@ -17,7 +17,7 @@ namespace Infrastructure.WebApiClient
             _client.Dispose();
         }
 
-        public async Task<string> GetJson(string url)
+        public async Task<string> GetContentString(string url)
         {
             Console.WriteLine("Вызван декоратор переотправки запроса.");
 
@@ -26,7 +26,7 @@ namespace Infrastructure.WebApiClient
             {
                 try
                 {
-                    return await _client.GetJson(url);
+                    return await _client.GetContentString(url);
                 }
                 catch (Exception ex)
                 {
@@ -38,7 +38,7 @@ namespace Infrastructure.WebApiClient
                 Console.WriteLine($"Повторная попытка подключения...");
             }
 
-            return await _client.GetJson(url);
+            return await _client.GetContentString(url);
         }
     }
 }

@@ -19,8 +19,6 @@ internal class Program
             .ConfigureAppConfiguration(configBuilder =>
             {
                 configBuilder
-                    // без этой строки пытается взять файл из папки бинов
-                    .SetBasePath("C:\\Users\\alex\\source\\repos\\BerserkHeroesCardInfoGenerator\\BerserkHeroesCardInfoGenerator")
                     .AddJsonFile("appsettings.json");
             })
             .ConfigureServices((hostContext, services) =>
@@ -30,12 +28,13 @@ internal class Program
                 services.Configure<SqliteOptions>(configuration.GetRequiredSection("ConnectionStrings"));
 
                 services.AddTransient<IWebApiClient, WebApiClient>();
+                services.AddTransient<IContentStringDeserializer, JsonStringDeserializer>();
 
-                services.AddTransient<IJsonDownloader>(provider =>
+                services.AddTransient<IContentDownloader>(provider =>
                 {
-                    IJsonDownloader service = new JsonDownloader();
-                    service = new JsonDownloaderLogger(service);
-                    return new JsonDownloaderRequestResender(service);
+                    IContentDownloader service = new ContentDownloader();
+                    service = new ContentDownloaderLogger(service);
+                    return new ContentDownloaderRequestResender(service);
                 });
 
                 services.AddTransient<ICardsStorageCreator, SpreadSheetStorageCreator>();
