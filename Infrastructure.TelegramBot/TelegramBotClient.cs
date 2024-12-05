@@ -7,6 +7,7 @@ using Telegram.Bot.Polling;
 using Telegram.Bot.Types.ReplyMarkups;
 using Infrastructure.TelegramBot.Abstractions;
 using Infrastructure.Common.Extensions;
+using Core.Application.UseCases;
 
 namespace Infrastructure.TelegramBot
 {
@@ -17,13 +18,16 @@ namespace Infrastructure.TelegramBot
     {
         private readonly TelegramBotOptions _options;
         private readonly IImageUrlComposer _imageUrlComposer;
+        private readonly SaveCardsUseCase _useCase;
 
         public TelegramBotClient(
             IOptions<TelegramBotOptions> options,
-            IImageUrlComposer imageUrlComposer)
+            IImageUrlComposer imageUrlComposer,
+            SaveCardsUseCase useCase)
         {
             _options = options.Value;
             _imageUrlComposer = imageUrlComposer;
+            _useCase = useCase;
         }
 
         public async Task Start()
@@ -42,6 +46,8 @@ namespace Infrastructure.TelegramBot
             // method that handle messages received by the bot:
             async Task OnMessage(Message msg, UpdateType type)
             {
+                Console.WriteLine($"Message: {msg.Text}");
+
                 var text = msg.Text.ToLower();
                 if (text.StartsWith("унгар"))
                 {
@@ -61,6 +67,35 @@ namespace Infrastructure.TelegramBot
                         {
                             await bot.SendMessage(msg.Chat, "Не нашлось такой карты");
                         }
+                    }
+
+                    if (text.Contains("термин"))
+                    {
+                        var term = text
+                            .Replace("унгар", "")
+                            .Replace("термин", "")
+                            .ToSearchable();
+
+                        if (term == "броня")
+                        {
+                            await bot.SendMessage(msg.Chat,
+                                "Броня Х: карта с бронёй Х не получает первые" +
+                                " Х ран от немагических атак в течение каждого хода (и своего, и противника).");
+                        }
+                        else
+                        {
+                            await bot.SendMessage(msg.Chat, "Не нашлось такого термина");
+                        }
+                    }
+
+                    if (text.Contains("выгрузка"))
+                    {
+                        await _useCase.ExecuteAsync();
+
+                        await using Stream stream = System.IO.File.OpenRead("MyBerserkHeroesCollection.xlsx");
+                        var message = await bot.SendDocument(msg.Chat, document: InputFile.FromStream(
+                            stream, $"BHCollection-{DateTime.Now.Date.ToShortDateString()}.xlsx"),
+                            caption: $"Выгрузка базы карт сайта berserkdeck.ru за {DateTime.Now.Date.ToShortDateString()}");
                     }
                 }
 

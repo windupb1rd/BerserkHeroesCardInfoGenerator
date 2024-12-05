@@ -44,7 +44,7 @@ namespace Infrastructure.WebApiClient
             }
             while (pageNumber < totalNumberOfPages);
 
-            _contentDownloader.Dispose();
+            //_contentDownloader.Dispose(); для бота не подходит, надо диспозить
 
             return new ContentToCardMapper().Map(content);
         }

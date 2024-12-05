@@ -19,7 +19,6 @@ namespace ConsoleClient
 
         public async Task StartAsync(CancellationToken cancellationToken)
         {
-            await _saveCardsUseCase.ExecuteAsync();
             await _telegramBotClient.Start();
         }
 
