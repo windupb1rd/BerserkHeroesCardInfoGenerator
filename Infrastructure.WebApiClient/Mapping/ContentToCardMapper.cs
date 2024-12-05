@@ -1,4 +1,5 @@
 ﻿using Core.Domain.Entities;
+using Infrastructure.Common.Extensions;
 using Infrastructure.WebApiClient.Models;
 
 namespace Infrastructure.WebApiClient.Mapping
@@ -23,18 +24,24 @@ namespace Infrastructure.WebApiClient.Mapping
                 {
                     ExternalId = card.Id,
                     Name = card.Name,
+                    NameForSearching = card.Name.ToSearchable(),
                     Cost = card.Cost,
                     Health = card.Health,
                     Attack = card.Attack,
                     Elements = string.Join(", ", card.Elements),
-                    CardClasses = string.Join(", ", card.CardClasses),
+                    FirstClass = card.FirstClass,
+                    SecondClass = card.SecondClass,
                     Rarity = card.Rarity,
                     IsFoil = card.IsFoil,
                     Text = card.Text,
                     Number = card.Number,
                     @Type = card.Type,
                     Variant = card.Variant,
-                    Set = $"{card.SetInfo.Name}",
+                    SetName = card.SetInfo.Name,
+                    SetNumber = card.SetInfo.Ordinal,
+                    Errata = card.Errata,
+                    IsActual = card.IsActual,
+                    Painter = card.Painter
                 });
             }
 

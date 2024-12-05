@@ -15,5 +15,10 @@ namespace Infrastructure.WebApiClient.Options
         /// Url.
         /// </summary>
         public required string Url { get; set; }
+
+        /// <summary>
+        /// Шаблон Url для запроса изображения карты.
+        /// </summary>
+        public required string ImageUrlPattern { get; set; }
     }
 }

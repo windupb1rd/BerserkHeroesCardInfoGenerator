@@ -5,6 +5,8 @@ using Microsoft.Extensions.Options;
 using Infrastructure.TelegramBot.Options;
 using Telegram.Bot.Polling;
 using Telegram.Bot.Types.ReplyMarkups;
+using Infrastructure.TelegramBot.Abstractions;
+using Infrastructure.Common.Extensions;
 
 namespace Infrastructure.TelegramBot
 {
@@ -14,10 +16,14 @@ namespace Infrastructure.TelegramBot
     public class TelegramBotClient
     {
         private readonly TelegramBotOptions _options;
+        private readonly IImageUrlComposer _imageUrlComposer;
 
-        public TelegramBotClient(IOptions<TelegramBotOptions> options)
+        public TelegramBotClient(
+            IOptions<TelegramBotOptions> options,
+            IImageUrlComposer imageUrlComposer)
         {
             _options = options.Value;
+            _imageUrlComposer = imageUrlComposer;
         }
 
         public async Task Start()
@@ -36,13 +42,24 @@ namespace Infrastructure.TelegramBot
             // method that handle messages received by the bot:
             async Task OnMessage(Message msg, UpdateType type)
             {
-                if (msg.Text.StartsWith("Унгар"))
+                var text = msg.Text.ToLower();
+                if (text.StartsWith("унгар"))
                 {
-                    if (msg.Text.Contains("карта"))
+                    if (text.Contains("карта"))
                     {
-                        if (msg.Text.ToLower().Contains("болотница"))
+                        var cardName = text
+                            .Replace("унгар", "")
+                            .Replace("карта", "")
+                            .ToSearchable();
+
+                        var imageUrl = _imageUrlComposer.ComposeByCardName(cardName);
+                        if (imageUrl != null)
                         {
-                            await bot.SendPhoto(msg.Chat, "https://www.berserkdeck.ru/dev/api/images/cards-heroes/16/90/regular");
+                            await bot.SendPhoto(msg.Chat, imageUrl);
+                        }
+                        else
+                        {
+                            await bot.SendMessage(msg.Chat, "Не нашлось такой карты");
                         }
                     }
                 }

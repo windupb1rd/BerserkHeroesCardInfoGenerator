@@ -5,6 +5,7 @@ using Infrastructure.SpreadSheets;
 using Infrastructure.SQLite;
 using Infrastructure.SQLite.DbContexts;
 using Infrastructure.TelegramBot;
+using Infrastructure.TelegramBot.Abstractions;
 using Infrastructure.TelegramBot.Options;
 using Infrastructure.WebApiClient;
 using Infrastructure.WebApiClient.Abstractions;
@@ -38,6 +39,7 @@ internal class Program
 
                 services.AddTransient<IWebApiClient, WebApiClient>();
                 services.AddTransient<IContentStringDeserializer, JsonStringDeserializer>();
+                services.AddTransient<IImageUrlComposer, ImageUrlComposer>();
                 services.AddTransient<IContentDownloader>(provider =>
                 {
                     IContentDownloader service = new ContentDownloader();
@@ -45,7 +47,7 @@ internal class Program
                     return new ContentDownloaderRequestResender(service);
                 });
                 services.AddTransient<ICardsStorageCreator, SpreadSheetStorageCreator>();
-                services.AddTransient<ICardsStorageCreator, SqliteStorageCreator>();
+                //services.AddTransient<ICardsStorageCreator, SqliteStorageCreator>();
                 services.AddTransient<SaveCardsUseCase>();
                 services.AddSingleton<TelegramBotClient>();
 

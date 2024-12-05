@@ -23,6 +23,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleClient", "BerserkHer
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure.TelegramBot", "Infrastructure.TelegramBot\Infrastructure.TelegramBot.csproj", "{AD9AF40E-7C66-4F33-BB68-98DCD4D23014}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure.Common", "Infrastructure.Common\Infrastructure.Common.csproj", "{06010907-B68F-4720-B082-8074E239A488}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -57,6 +59,10 @@ Global
 		{AD9AF40E-7C66-4F33-BB68-98DCD4D23014}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AD9AF40E-7C66-4F33-BB68-98DCD4D23014}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AD9AF40E-7C66-4F33-BB68-98DCD4D23014}.Release|Any CPU.Build.0 = Release|Any CPU
+		{06010907-B68F-4720-B082-8074E239A488}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{06010907-B68F-4720-B082-8074E239A488}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{06010907-B68F-4720-B082-8074E239A488}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{06010907-B68F-4720-B082-8074E239A488}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -68,5 +74,6 @@ Global
 		{87824D21-E40F-463E-8F0F-DB3870653708} = {64CAF012-5596-466B-88FC-5525A718B38C}
 		{2139B07A-D66A-4732-9652-E4E3F97E2273} = {64CAF012-5596-466B-88FC-5525A718B38C}
 		{AD9AF40E-7C66-4F33-BB68-98DCD4D23014} = {64CAF012-5596-466B-88FC-5525A718B38C}
+		{06010907-B68F-4720-B082-8074E239A488} = {64CAF012-5596-466B-88FC-5525A718B38C}
 	EndGlobalSection
 EndGlobal
