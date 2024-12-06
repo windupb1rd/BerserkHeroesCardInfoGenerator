@@ -37,12 +37,14 @@ internal class Program
                 services.AddDbContext<AppDbContext>(options =>
                     options.UseSqlite(configuration.GetConnectionString("SQLite")));
 
+                services.AddHttpClient();
                 services.AddTransient<IWebApiClient, WebApiClient>();
                 services.AddTransient<IContentStringDeserializer, JsonStringDeserializer>();
                 services.AddTransient<IImageUrlComposer, ImageUrlComposer>();
                 services.AddTransient<IContentDownloader>(provider =>
                 {
-                    IContentDownloader service = new ContentDownloader();
+                    var httpClientFactory = provider.GetRequiredService<IHttpClientFactory>();
+                    IContentDownloader service = new ContentDownloader(httpClientFactory);
                     service = new ContentDownloaderLogger(service);
                     return new ContentDownloaderRequestResender(service);
                 });
