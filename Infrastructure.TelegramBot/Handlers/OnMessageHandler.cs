@@ -43,7 +43,7 @@ namespace Infrastructure.TelegramBot.Handlers
                     var imageUrl = _imageUrlComposer.ComposeByCardName(cardName);
                     if (imageUrl != null)
                     {
-                        await _bot.SendPhoto(msg.Chat, imageUrl);
+                        await _bot.SendPhoto(msg.Chat, imageUrl, replyParameters: msg.Id);
                     }
                     else
                     {
