@@ -31,7 +31,7 @@ namespace Infrastructure.SQLite
 
             return card == null
                 ? null
-                : string.Format(_options.ImageUrlPattern, card.SetNumber, card.Number);
+                : string.Format(_options.ImageUrlPattern, card.SetNumber, card.Number, card.Variant);
         }
     }
 }
