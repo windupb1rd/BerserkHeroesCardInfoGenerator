@@ -2,10 +2,13 @@
 
 namespace Infrastructure.WebApiClient.Abstractions
 {
+    /// <summary>
+    /// Абстракция десериализатора в объект <see cref="Page"/>
+    /// </summary>
     public interface IContentStringDeserializer
     {
         /// <summary>
-        /// Десериализовать строку в объект <see cref="Page"/>
+        /// Десериализует строку в объект <see cref="Page"/>
         /// </summary>
         /// <param name="response"></param>
         /// <returns></returns>

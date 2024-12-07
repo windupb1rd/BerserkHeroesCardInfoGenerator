@@ -8,6 +8,9 @@ using Microsoft.Extensions.Options;
 
 namespace Infrastructure.WebApiClient
 {
+    /// <summary>
+    /// Клиент получения данных с API.
+    /// </summary>
     public class WebApiClient : IWebApiClient
     {
         private const string URL_PATTERN = "{0}?sort=setInfo.ordinal,desc&sort=number&page={1}&size=2000";
@@ -25,6 +28,7 @@ namespace Infrastructure.WebApiClient
             _contentStringDeserializer = contentStringDeserializer;
         }
 
+        /// <inheritdoc/>
         public async Task<IEnumerable<Card>> GetCardsAsync()
         {
             var content = new List<Content>();
