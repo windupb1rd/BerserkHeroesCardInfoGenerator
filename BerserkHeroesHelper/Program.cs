@@ -7,6 +7,8 @@ using Infrastructure.SQLite.DbContexts;
 using Infrastructure.TelegramBot;
 using Infrastructure.TelegramBot.Abstractions;
 using Infrastructure.TelegramBot.Options;
+using Infrastructure.Vk;
+using Infrastructure.Vk.Options;
 using Infrastructure.WebApiClient;
 using Infrastructure.WebApiClient.Abstractions;
 using Infrastructure.WebApiClient.Options;
@@ -33,6 +35,7 @@ internal class Program
                 IConfiguration configuration = hostContext.Configuration;
                 services.Configure<WebApiOptions>(configuration.GetRequiredSection("WebApi"));
                 services.Configure<TelegramBotOptions>(configuration.GetRequiredSection("TelegramBotClient"));
+                services.Configure<VkApplicationClientOptions>(configuration.GetRequiredSection("VkApplicationClient"));
 
                 services.AddDbContext<AppDbContext>(options =>
                     options.UseSqlite(configuration.GetConnectionString("SQLite")));
@@ -48,9 +51,10 @@ internal class Program
                     service = new ContentDownloaderLogger(service);
                     return new ContentDownloaderRequestResender(service);
                 });
-                services.AddTransient<ICardsStorageCreator, SpreadSheetStorageCreator>();
-                //services.AddTransient<ICardsStorageCreator, SqliteStorageCreator>();
+                //services.AddTransient<ICardsStorageCreator, SpreadSheetStorageCreator>();
+                services.AddTransient<ICardsStorageCreator, SqliteStorageCreator>();
                 services.AddTransient<SaveCardsUseCase>();
+                services.AddSingleton<VkApplicationClient>();
                 services.AddSingleton<TelegramBotClient>();
 
                 services.AddHostedService<MainHostedService>();

@@ -25,6 +25,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure.TelegramBot"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure.Common", "Infrastructure.Common\Infrastructure.Common.csproj", "{06010907-B68F-4720-B082-8074E239A488}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure.Vk", "Infrastructure.Vk\Infrastructure.Vk.csproj", "{4D959471-3C6A-4A12-8DC1-E06130646E87}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +65,10 @@ Global
 		{06010907-B68F-4720-B082-8074E239A488}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{06010907-B68F-4720-B082-8074E239A488}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{06010907-B68F-4720-B082-8074E239A488}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4D959471-3C6A-4A12-8DC1-E06130646E87}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D959471-3C6A-4A12-8DC1-E06130646E87}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D959471-3C6A-4A12-8DC1-E06130646E87}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D959471-3C6A-4A12-8DC1-E06130646E87}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -75,5 +81,6 @@ Global
 		{2139B07A-D66A-4732-9652-E4E3F97E2273} = {64CAF012-5596-466B-88FC-5525A718B38C}
 		{AD9AF40E-7C66-4F33-BB68-98DCD4D23014} = {64CAF012-5596-466B-88FC-5525A718B38C}
 		{06010907-B68F-4720-B082-8074E239A488} = {64CAF012-5596-466B-88FC-5525A718B38C}
+		{4D959471-3C6A-4A12-8DC1-E06130646E87} = {64CAF012-5596-466B-88FC-5525A718B38C}
 	EndGlobalSection
 EndGlobal
