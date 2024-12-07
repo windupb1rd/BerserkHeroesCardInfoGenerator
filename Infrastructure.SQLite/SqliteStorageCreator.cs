@@ -19,11 +19,14 @@ namespace Infrastructure.SQLite
         /// <inheritdoc/>
         public async Task Create(IEnumerable<Card> cards)
         {
-            var a = _context.Cards;
+            var cardsInDb = _context.Cards.ToList();
 
-            // TODO: проверять на наличие, добавлять только новые
-            await _context.AddRangeAsync(cards);
+            var cardsToSave = cards
+                .Where(x => !cardsInDb
+                    .Select(x => x.ExternalId)
+                    .Contains(x.ExternalId));
 
+            await _context.AddRangeAsync(cardsToSave);
 
             await _context.SaveChangesAsync();
 

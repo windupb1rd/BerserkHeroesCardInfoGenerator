@@ -34,7 +34,7 @@ namespace Infrastructure.WebApiClient
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine($"Ошибка клиента {ex.ToString()}.");
+                    Console.WriteLine($"Ошибка клиента {ex.Message}.");
                     nextDelay += nextDelay;
                     await Task.Delay(nextDelay);
                 }

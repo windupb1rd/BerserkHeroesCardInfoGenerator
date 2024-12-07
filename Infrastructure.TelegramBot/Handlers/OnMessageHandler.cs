@@ -87,6 +87,12 @@ namespace Infrastructure.TelegramBot.Handlers
                     replyMarkup: new InlineKeyboardMarkup().AddButtons("Left", "Right"));
             }
 
+            // служебная ручка, удалить
+            if (msg.Text == "/update")
+            {
+                await _saveCarsUseCase.ExecuteAsync();
+            }
+
             //if (msg.Text == "болотница")
             //{
             //    await bot.SendPhoto(msg.Chat, "https://www.berserkdeck.ru/dev/api/images/cards-heroes/16/90/regular");
