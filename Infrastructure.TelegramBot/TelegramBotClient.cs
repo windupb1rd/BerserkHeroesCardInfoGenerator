@@ -1,35 +1,37 @@
 ﻿using Telegram.Bot;
-using Telegram.Bot.Types.Enums;
-using Telegram.Bot.Types;
 using Microsoft.Extensions.Options;
 using Infrastructure.TelegramBot.Options;
-using Telegram.Bot.Polling;
-using Telegram.Bot.Types.ReplyMarkups;
 using Infrastructure.TelegramBot.Abstractions;
-using Infrastructure.Common.Extensions;
 using Core.Application.UseCases;
-using CONST = Infrastructure.TelegramBot.Constants.BotCommandsConstants;
 using Infrastructure.TelegramBot.Handlers;
+using Infrastructure.Vk.Abstractions;
 
 namespace Infrastructure.TelegramBot
 {
     /// <summary>
     /// Клиент телеграм бота.
+    /// Документация: https://telegrambots.github.io/book/index.html.
     /// </summary>
     public class TelegramBotClient
     {
         private readonly TelegramBotOptions _options;
         private readonly IImageUrlComposer _imageUrlComposer;
+        private readonly ITermRepository _termRepository;
+        private readonly IAuctionPostInfoRepository _auctionPostInfoRepository;
         private readonly SaveCardsUseCase _useCase;
 
         public TelegramBotClient(
             IOptions<TelegramBotOptions> options,
             IImageUrlComposer imageUrlComposer,
-            SaveCardsUseCase useCase)
+            SaveCardsUseCase useCase,
+            ITermRepository termRepository,
+            IAuctionPostInfoRepository auctionPostInfoRepository)
         {
             _options = options.Value;
             _imageUrlComposer = imageUrlComposer;
             _useCase = useCase;
+            _termRepository = termRepository;
+            _auctionPostInfoRepository = auctionPostInfoRepository;
         }
 
         public async Task Start()
@@ -39,7 +41,7 @@ namespace Infrastructure.TelegramBot
             var me = await bot.GetMe();
 
             // придумать как зарезолвить хендлеры из контейнера. Пока проблема в зависимости от bot.
-            var onMessageHandler = new OnMessageHandler(bot, _imageUrlComposer, _useCase);
+            var onMessageHandler = new OnMessageHandler(bot, _imageUrlComposer, _useCase, _termRepository, _auctionPostInfoRepository);
             var onUpdateHandler = new OnUpdateHandler(bot);
             var onErrorHandler = new OnErrorHandler();
 

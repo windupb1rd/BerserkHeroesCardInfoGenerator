@@ -7,16 +7,13 @@ namespace ConsoleClient
 {
     internal class MainHostedService : IHostedService
     {
-        private readonly SaveCardsUseCase _saveCardsUseCase;
         private readonly TelegramBotClient _telegramBotClient;
         private readonly VkApplicationClient _vkApplicationClient;
 
         public MainHostedService(
-            SaveCardsUseCase saveCardsUseCase,
             TelegramBotClient telegramBotClient,
             VkApplicationClient vkApplicationClient)
         {
-            _saveCardsUseCase = saveCardsUseCase;
             _telegramBotClient = telegramBotClient;
             _vkApplicationClient = vkApplicationClient;
         }

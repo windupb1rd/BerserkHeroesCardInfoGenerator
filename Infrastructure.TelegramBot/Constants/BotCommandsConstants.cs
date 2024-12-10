@@ -6,23 +6,23 @@
     public class BotCommandsConstants
     {
         /// <summary>
-        /// Слово, с которого должно начинаться сообщение, чтобы на него отреагировал бот.
+        /// Команда поиска карты.
         /// </summary>
-        public const string BOT_ADDRESSING_COMMAND = "унгар";
+        public const string GET_CARD_COMMAND = "!к";
 
         /// <summary>
         /// Команда поиска карты.
         /// </summary>
-        public const string GET_CARD_COMMAND = "карта";
-
-        /// <summary>
-        /// Команда поиска карты.
-        /// </summary>
-        public const string GET_TERM_COMMAND = "термин";
+        public const string GET_TERM_COMMAND = "!т";
 
         /// <summary>
         /// Команда выгрузки базы карт.
         /// </summary>
-        public const string GET_XLSX_DUMP_COMMAND = "выгрузка";
+        public const string GET_XLSX_DUMP_COMMAND = "!в";
+
+        /// <summary>
+        /// Команда поиска информаци об аукционах.
+        /// </summary>
+        public const string GET_AUC_INFO_COMMAND = "!аук";
     }
 }

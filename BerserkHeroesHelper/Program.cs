@@ -4,10 +4,12 @@ using Core.Application.UseCases;
 using Infrastructure.SpreadSheets;
 using Infrastructure.SQLite;
 using Infrastructure.SQLite.DbContexts;
+using Infrastructure.SQLite.Repositories;
 using Infrastructure.TelegramBot;
 using Infrastructure.TelegramBot.Abstractions;
 using Infrastructure.TelegramBot.Options;
 using Infrastructure.Vk;
+using Infrastructure.Vk.Abstractions;
 using Infrastructure.Vk.Options;
 using Infrastructure.WebApiClient;
 using Infrastructure.WebApiClient.Abstractions;
@@ -27,8 +29,9 @@ internal class Program
             .ConfigureAppConfiguration(configBuilder =>
             {
                 configBuilder
-                    .AddUserSecrets(Assembly.GetExecutingAssembly(), true)
-                    .AddJsonFile("appsettings.json");
+                    .AddJsonFile("appsettings.json")
+                    .AddJsonFile("appsettings.local.json", optional: true);
+                    
             })
             .ConfigureServices((hostContext, services) =>
             {
@@ -44,6 +47,8 @@ internal class Program
                 services.AddTransient<IWebApiClient, WebApiClient>();
                 services.AddTransient<IContentStringDeserializer, JsonStringDeserializer>();
                 services.AddTransient<IImageUrlComposer, ImageUrlComposer>();
+                services.AddTransient<ITermRepository, TermRepository>();
+                services.AddTransient<IAuctionPostInfoRepository, AuctionPostInfoRepository>();
                 services.AddTransient<IContentDownloader>(provider =>
                 {
                     var httpClientFactory = provider.GetRequiredService<IHttpClientFactory>();
@@ -51,7 +56,7 @@ internal class Program
                     service = new ContentDownloaderLogger(service);
                     return new ContentDownloaderRequestResender(service);
                 });
-                //services.AddTransient<ICardsStorageCreator, SpreadSheetStorageCreator>();
+                services.AddTransient<ICardsStorageCreator, SpreadSheetStorageCreator>();
                 services.AddTransient<ICardsStorageCreator, SqliteStorageCreator>();
                 services.AddTransient<SaveCardsUseCase>();
                 services.AddSingleton<VkApplicationClient>();
