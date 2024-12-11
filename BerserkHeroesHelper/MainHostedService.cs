@@ -26,6 +26,7 @@ namespace ConsoleClient
 
         public Task StopAsync(CancellationToken cancellationToken)
         {
+            _vkApplicationClient.Stop();
             return Task.CompletedTask;
         }
     }

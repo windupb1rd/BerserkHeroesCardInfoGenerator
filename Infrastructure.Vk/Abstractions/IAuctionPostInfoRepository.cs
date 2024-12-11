@@ -6,7 +6,11 @@ namespace Infrastructure.Vk.Abstractions
     {
         Task AddRangeAsync(IEnumerable<AuctionPostInfo> range);
 
+        void AddRange(IEnumerable<AuctionPostInfo> range);
+
         Task SaveChangesAsync();
+
+        int SaveChanges();
 
         string? GetAucInfosByCardName(string cardName);
     }

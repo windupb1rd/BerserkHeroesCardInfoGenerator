@@ -26,6 +26,14 @@ namespace Infrastructure.SQLite.Repositories
             await _context.AddRangeAsync(aucInfosToSave);
         }
 
+        public void AddRange(IEnumerable<AuctionPostInfo> range)
+        {
+            var existingAucInfos = _context.AuctionPostInfos.Select(x => x.ExternalId).ToHashSet();
+            var aucInfosToSave = range.Where(x => !existingAucInfos.Contains(x.ExternalId));
+
+            _context.AddRange(aucInfosToSave);
+        }
+
         public string? GetAucInfosByCardName(string cardName)
         {
             var infos = _context.AuctionPostInfos
@@ -44,6 +52,11 @@ namespace Infrastructure.SQLite.Repositories
         public async Task SaveChangesAsync()
         {
             await _context.SaveChangesAsync();
+        }
+
+        public int SaveChanges()
+        {
+            return _context.SaveChanges();
         }
     }
 }

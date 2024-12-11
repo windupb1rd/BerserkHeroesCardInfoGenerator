@@ -116,6 +116,7 @@ namespace Infrastructure.TelegramBot.Handlers
             if (msg.Text == "//update")
             {
                 await _saveCarsUseCase.ExecuteAsync();
+                await _bot.SendMessage(msg.Chat, "Готово", replyParameters: msg.Id);
             }
 
             // пример добавления кнопок
