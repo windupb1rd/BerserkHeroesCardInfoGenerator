@@ -5,6 +5,7 @@ using Infrastructure.TelegramBot.Abstractions;
 using Core.Application.UseCases;
 using Infrastructure.TelegramBot.Handlers;
 using Infrastructure.Vk.Abstractions;
+using Core.Application.Services;
 
 namespace Infrastructure.TelegramBot
 {
@@ -36,6 +37,8 @@ namespace Infrastructure.TelegramBot
 
         public async Task Start()
         {
+            var cardsUpdater = new CardsInfoUpdater(_useCase);
+
             using var cts = new CancellationTokenSource();
             var bot = new Telegram.Bot.TelegramBotClient(_options.Token, cancellationToken: cts.Token);
             var me = await bot.GetMe();

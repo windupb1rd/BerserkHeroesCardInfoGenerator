@@ -1,5 +1,6 @@
 ﻿using ConsoleClient;
 using Core.Application.Abstractions;
+using Core.Application.Services;
 using Core.Application.UseCases;
 using Infrastructure.SpreadSheets;
 using Infrastructure.SQLite;
@@ -18,6 +19,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
 using System.Reflection;
 
 internal class Program
@@ -56,7 +58,7 @@ internal class Program
                     service = new ContentDownloaderLogger(service);
                     return new ContentDownloaderRequestResender(service);
                 });
-                services.AddTransient<ICardsStorageCreator, SpreadSheetStorageCreator>();
+                //services.AddTransient<ICardsStorageCreator, SpreadSheetStorageCreator>();
                 services.AddTransient<ICardsStorageCreator, SqliteStorageCreator>();
                 services.AddTransient<SaveCardsUseCase>();
                 services.AddSingleton<VkApplicationClient>();

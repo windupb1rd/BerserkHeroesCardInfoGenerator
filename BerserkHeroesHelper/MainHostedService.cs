@@ -1,4 +1,5 @@
-﻿using Core.Application.UseCases;
+﻿using Core.Application.Services;
+using Core.Application.UseCases;
 using Infrastructure.TelegramBot;
 using Infrastructure.Vk;
 using Microsoft.Extensions.Hosting;

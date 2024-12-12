@@ -7,7 +7,7 @@ using VkNet;
 
 namespace Infrastructure.Vk
 {
-    internal class AucInfoUpdater : IDisposable
+    public class AucInfoUpdater : IDisposable
     {
         private readonly VkApplicationClientOptions _options;
         private readonly IAuctionPostInfoRepository _auctionPostInfoRepository;
