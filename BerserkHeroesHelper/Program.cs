@@ -58,7 +58,7 @@ internal class Program
                     service = new ContentDownloaderLogger(service);
                     return new ContentDownloaderRequestResender(service);
                 });
-                //services.AddTransient<ICardsStorageCreator, SpreadSheetStorageCreator>();
+                services.AddTransient<ICardsStorageCreator, SpreadSheetStorageCreator>();
                 services.AddTransient<ICardsStorageCreator, SqliteStorageCreator>();
                 services.AddTransient<SaveCardsUseCase>();
                 services.AddSingleton<VkApplicationClient>();
