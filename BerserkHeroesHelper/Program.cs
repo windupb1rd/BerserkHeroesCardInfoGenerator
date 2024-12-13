@@ -51,12 +51,12 @@ internal class Program
                 services.AddTransient<IImageUrlComposer, ImageUrlComposer>();
                 services.AddTransient<ITermRepository, TermRepository>();
                 services.AddTransient<IAuctionPostInfoRepository, AuctionPostInfoRepository>();
-                services.AddTransient<IContentDownloader>(provider =>
+                services.AddTransient<IContentDownloaderProvider>(provider =>
                 {
                     var httpClientFactory = provider.GetRequiredService<IHttpClientFactory>();
-                    IContentDownloader service = new ContentDownloader(httpClientFactory);
-                    service = new ContentDownloaderLogger(service);
-                    return new ContentDownloaderRequestResender(service);
+                    IContentDownloaderProvider service = new ContentDownloaderProvider(httpClientFactory);
+                    service = new ContentDownloaderLoggerProvider(service);
+                    return new ContentDownloaderRequestResenderProvider(service);
                 });
                 services.AddTransient<ICardsStorageCreator, SpreadSheetStorageCreator>();
                 services.AddTransient<ICardsStorageCreator, SqliteStorageCreator>();

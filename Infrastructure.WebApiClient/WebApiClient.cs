@@ -15,17 +15,17 @@ namespace Infrastructure.WebApiClient
     {
         private const string URL_PATTERN = "{0}?sort=setInfo.ordinal,desc&sort=number&page={1}&size=2000";
         private readonly WebApiOptions _options;
-        private readonly IContentDownloader _contentDownloader;
+        private readonly IContentDownloaderProvider _contentDownloaderProvider;
         private readonly IContentStringDeserializer _contentStringDeserializer;
 
         public WebApiClient(
             IOptions<WebApiOptions> options,
-            IContentDownloader jsonDownloader,
-            IContentStringDeserializer contentStringDeserializer)
+            IContentStringDeserializer contentStringDeserializer,
+            IContentDownloaderProvider contentDownloaderProvider)
         {
             _options = options.Value;
-            _contentDownloader = jsonDownloader;
             _contentStringDeserializer = contentStringDeserializer;
+            _contentDownloaderProvider = contentDownloaderProvider;
         }
 
         /// <inheritdoc/>
@@ -35,16 +35,18 @@ namespace Infrastructure.WebApiClient
 
             var pageNumber = 0;
             var totalNumberOfPages = 0;
-            do
-            {
-                string response = await _contentDownloader.GetContentString(string.Format(URL_PATTERN, _options.Url, ++pageNumber));
-                var data = _contentStringDeserializer.DeserilizeIntoPage(response);
-                content.AddRange(data.Content);
-                totalNumberOfPages = data.TotalPages;
-            }
-            while (pageNumber < totalNumberOfPages);
 
-            _contentDownloader.Dispose();
+            using (var contentDownloader = _contentDownloaderProvider.Create())
+            {
+                do
+                {
+                    string response = await contentDownloader.GetContentString(string.Format(URL_PATTERN, _options.Url, ++pageNumber));
+                    var data = _contentStringDeserializer.DeserilizeIntoPage(response);
+                    content.AddRange(data.Content);
+                    totalNumberOfPages = data.TotalPages;
+                }
+                while (pageNumber < totalNumberOfPages);
+            }
 
             return new ContentToCardMapper().Map(content);
         }

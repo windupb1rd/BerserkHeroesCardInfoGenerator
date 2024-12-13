@@ -8,18 +8,17 @@ namespace Infrastructure.WebApiClient
     /// </summary>
     public class ContentDownloader : IContentDownloader
     {
-        private readonly IHttpClientFactory _httpClientFactory;
-        private HttpClient? _httpClient;
-        private bool _isDisposed = true;
+        private readonly HttpClient _httpClient;
+        private bool _isDisposed = false;
 
-        public ContentDownloader(IHttpClientFactory httpClientFactory)
+        public ContentDownloader(HttpClient httpClient)
         {
-            _httpClientFactory = httpClientFactory;
+            _httpClient = httpClient;
         }
 
         public void Dispose()
         {
-            _httpClient?.Dispose();
+            _httpClient.Dispose();
             _isDisposed = true;
         }
 
@@ -28,11 +27,10 @@ namespace Infrastructure.WebApiClient
         {
             if (_isDisposed)
             {
-                _httpClient = _httpClientFactory.CreateClient(url);
-                _isDisposed = false;
+                throw new ObjectDisposedException(nameof(ContentDownloader));
             }
 
-            return _httpClient?.GetStringAsync(url);
+            return _httpClient.GetStringAsync(url);
         }
     }
 }
