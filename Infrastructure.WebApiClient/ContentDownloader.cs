@@ -9,7 +9,7 @@ namespace Infrastructure.WebApiClient
     public class ContentDownloader : IContentDownloader
     {
         private readonly IHttpClientFactory _httpClientFactory;
-        private HttpClient _httpClient;
+        private HttpClient? _httpClient;
         private bool _isDisposed = true;
 
         public ContentDownloader(IHttpClientFactory httpClientFactory)
@@ -19,7 +19,7 @@ namespace Infrastructure.WebApiClient
 
         public void Dispose()
         {
-            _httpClient.Dispose();
+            _httpClient?.Dispose();
             _isDisposed = true;
         }
 
@@ -32,7 +32,7 @@ namespace Infrastructure.WebApiClient
                 _isDisposed = false;
             }
 
-            return _httpClient.GetStringAsync(url);
+            return _httpClient?.GetStringAsync(url);
         }
     }
 }

@@ -11,7 +11,7 @@ namespace Infrastructure.Vk
     {
         private readonly VkApplicationClientOptions _options;
         private readonly IAuctionPostInfoRepository _auctionPostInfoRepository;
-        private readonly Timer _timer;
+        private Timer _timer;
 
         public AucInfoUpdater(
             VkApplicationClientOptions options,
@@ -19,8 +19,6 @@ namespace Infrastructure.Vk
         {
             _options = options;
             _auctionPostInfoRepository = auctionPostInfoRepository;
-
-            _timer = new Timer(Update, null, 60000, 86400000);
         }
 
         public void Dispose()
@@ -28,7 +26,12 @@ namespace Infrastructure.Vk
             _timer.Dispose();
         }
 
-        public void Update(object? state)
+        public void Start()
+        {
+            _timer = new Timer(Update, null, 60000, 86400000);
+        }
+
+        private void Update(object? state)
         {
             Task.Run(() =>
             {

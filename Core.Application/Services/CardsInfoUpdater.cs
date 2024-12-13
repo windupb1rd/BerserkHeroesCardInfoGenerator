@@ -5,21 +5,24 @@ namespace Core.Application.Services
     public class CardsInfoUpdater : IDisposable
     {
         private readonly SaveCardsUseCase _useCase;
-        private readonly Timer _timer;
+        private Timer? _timer;
 
         public CardsInfoUpdater(SaveCardsUseCase useCase)
         {
             _useCase = useCase;
-
-            _timer = new Timer(Update, null, 60000, 86400000);
         }
 
         public void Dispose()
         {
-            _timer.Dispose();
+            _timer?.Dispose();
         }
 
-        public void Update(object? state)
+        public void Start()
+        {
+            _timer = new Timer(Update, null, 60000, 86400000);
+        }
+
+        private void Update(object? state)
         {
             Task.Run(async () =>
             {

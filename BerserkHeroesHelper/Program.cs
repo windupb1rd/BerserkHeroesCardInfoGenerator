@@ -60,6 +60,7 @@ internal class Program
                 });
                 services.AddTransient<ICardsStorageCreator, SpreadSheetStorageCreator>();
                 services.AddTransient<ICardsStorageCreator, SqliteStorageCreator>();
+                services.AddTransient<CardsInfoUpdater>();
                 services.AddTransient<SaveCardsUseCase>();
                 services.AddSingleton<VkApplicationClient>();
                 services.AddSingleton<TelegramBotClient>();

@@ -18,9 +18,12 @@ namespace Infrastructure.Vk
             _auctionPostInfoRepository = auctionPostInfoRepository;
         }
 
-        public async Task Start()
+        public Task Start()
         {
             _updater = new AucInfoUpdater(_options, _auctionPostInfoRepository);
+            _updater.Start();
+
+            return Task.CompletedTask;
         }
 
         public void Stop()

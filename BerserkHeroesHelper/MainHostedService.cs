@@ -10,17 +10,21 @@ namespace ConsoleClient
     {
         private readonly TelegramBotClient _telegramBotClient;
         private readonly VkApplicationClient _vkApplicationClient;
+        private readonly CardsInfoUpdater _cardsInfoUpdater;
 
         public MainHostedService(
             TelegramBotClient telegramBotClient,
-            VkApplicationClient vkApplicationClient)
+            VkApplicationClient vkApplicationClient,
+            CardsInfoUpdater cardsInfoUpdater)
         {
             _telegramBotClient = telegramBotClient;
             _vkApplicationClient = vkApplicationClient;
+            _cardsInfoUpdater = cardsInfoUpdater;
         }
 
         public async Task StartAsync(CancellationToken cancellationToken)
         {
+            _cardsInfoUpdater.Start();
             await _vkApplicationClient.Start();
             await _telegramBotClient.Start();
         }
