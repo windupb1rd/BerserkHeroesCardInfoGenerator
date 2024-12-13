@@ -2,7 +2,7 @@
 
 namespace Infrastructure.TelegramBot.Handlers
 {
-    internal class OnErrorHandler
+    public class OnErrorHandler
     {
         public async Task OnError(Exception exception, HandleErrorSource source)
         {

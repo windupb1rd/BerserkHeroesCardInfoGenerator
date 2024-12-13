@@ -1,21 +1,20 @@
 ﻿using Infrastructure.WebApiClient.Abstractions;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Infrastructure.WebApiClient
 {
     public class ContentDownloaderProvider : IContentDownloaderProvider
     {
-        private readonly IHttpClientFactory _httpClientFactory;
+        private readonly Func<IContentDownloader> _contentDownloaderFactory;
 
-        public ContentDownloaderProvider(
-            IHttpClientFactory httpClientFactory)
+        public ContentDownloaderProvider(Func<IContentDownloader> contentDownloaderFactory)
         {
-            _httpClientFactory = httpClientFactory;
+            _contentDownloaderFactory = contentDownloaderFactory;
         }
 
         public IContentDownloader Create()
         {
-            var client = _httpClientFactory.CreateClient();
-            return new ContentDownloader(client);
+            return _contentDownloaderFactory.Invoke();
         }
     }
 }

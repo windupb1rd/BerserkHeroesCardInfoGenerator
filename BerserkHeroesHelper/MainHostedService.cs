@@ -8,12 +8,12 @@ namespace ConsoleClient
 {
     internal class MainHostedService : IHostedService
     {
-        private readonly TelegramBotClient _telegramBotClient;
+        private readonly TelegramBotService _telegramBotClient;
         private readonly VkApplicationClient _vkApplicationClient;
         private readonly CardsInfoUpdater _cardsInfoUpdater;
 
         public MainHostedService(
-            TelegramBotClient telegramBotClient,
+            TelegramBotService telegramBotClient,
             VkApplicationClient vkApplicationClient,
             CardsInfoUpdater cardsInfoUpdater)
         {

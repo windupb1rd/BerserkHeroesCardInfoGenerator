@@ -1,14 +1,14 @@
-﻿using Telegram.Bot;
+﻿using Infrastructure.TelegramBot.Abstractions;
 using Telegram.Bot.Types;
 
 namespace Infrastructure.TelegramBot.Handlers
 {
-    internal class OnUpdateHandler
+    public class OnUpdateHandler
     {
-        private readonly Telegram.Bot.TelegramBotClient _bot;
+        private readonly IBotClientMessenger _bot;
 
         public OnUpdateHandler(
-            Telegram.Bot.TelegramBotClient bot)
+            IBotClientMessenger bot)
         {
             _bot = bot;
         }
@@ -18,8 +18,8 @@ namespace Infrastructure.TelegramBot.Handlers
         {
             if (update is { CallbackQuery: { } query }) // non-null CallbackQuery
             {
-                await _bot.AnswerCallbackQuery(query.Id, $"You picked {query.Data}");
-                await _bot.SendMessage(query.Message!.Chat, $"User {query.From} clicked on {query.Data}");
+                //await _bot.AnswerCallbackQuery(query.Id, $"You picked {query.Data}");
+                await _bot.SendMessage(query.Message!.Chat.Id, $"User {query.From} clicked on {query.Data}");
             }
         }
     }
